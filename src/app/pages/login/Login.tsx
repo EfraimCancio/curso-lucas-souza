@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -11,6 +11,14 @@ export const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    console.log(password);
+  }, [password]);
+
+  useEffect(() => {
+    console.log(email);
+  }, [email]);
 
   const handleEntrar = () => {
     console.log(email);
@@ -40,7 +48,7 @@ export const Login = () => {
           Entrar
         </button>
       </form>
-      Loguin
+
       <button onClick={handleClick}>Página inicial</button>
     </div>
   );
