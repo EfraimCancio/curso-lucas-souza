@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -12,6 +12,10 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const emailLength = useMemo(() => {
+    return email.length * 100;
+  }, [email.length]);
+
   useEffect(() => {
     console.log(password);
   }, [password]);
@@ -20,14 +24,15 @@ export const Login = () => {
     console.log(email);
   }, [email]);
 
-  const handleEntrar = () => {
-    console.log(email);
+  const handleEntrar = useCallback(() => {
     console.log(password);
-  };
+    console.log(email);
+  }, [email, password]);
 
   return (
     <div>
       <form>
+        <p>Quantidade de caracteres no e-mail: {emailLength}</p>
         <label>
           <span>Email</span>
           <input
