@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -8,6 +8,8 @@ export const Login = () => {
     e.preventDefault();
     navigate("/pagina-inicial");
   };
+
+  const inputPasswordRef = useRef<HTMLInputElement>(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,11 +41,15 @@ export const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === "Enter" ? inputPasswordRef.current?.focus() : undefined
+            }
           />
         </label>
         <label>
           <span>Senha</span>
           <input
+            ref={inputPasswordRef}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
